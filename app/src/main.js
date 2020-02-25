@@ -23,6 +23,7 @@ import Workshops from './components/Workshops'
 import Matchmaking from './components/Matchmaking'
 import Job_Fair from './components/Job_Fair'
 import TechTalks from './components/TechTalks'
+import company from './components/company'
 
 import Posts from './components/Posts'
 
@@ -52,6 +53,7 @@ Vue.component('workshops', Workshops)
 Vue.component('matchmaking', Matchmaking)
 Vue.component('job-fair', Job_Fair)
 Vue.component('techtalks', TechTalks)
+Vue.component('company', company)
 
 Vue.component('image-center-text', Image_Center_Text)
 

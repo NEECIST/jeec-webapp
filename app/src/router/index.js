@@ -5,8 +5,10 @@ import Speakers from '@/pages/Speakers'
 import Team from '@/pages/Team'
 import Partners from '@/pages/Partners'
 import Error_Handling from '@/pages/Error_Handling'
+import newfeed from '@/pages/newfeed'
 import Activities from '@/pages/Activities'
 import Schedule from '@/pages/Schedule'
+
 
 Vue.use(Router)
 
@@ -41,6 +43,11 @@ export default new Router({
       name: 'Speakers',
       component: Speakers
     },
+    {
+      path: '/newfeed',
+      name: 'newfeed',
+      component: newfeed
+    },
     // {
     //   path: '/schedule',
     //   name: 'Schedule',
@@ -49,7 +56,8 @@ export default new Router({
     { 
       path: '/404', 
       component: Error_Handling 
-    },  
+    }, 
+
     { path: '*', 
       redirect: '/404' 
     }

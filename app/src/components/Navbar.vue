@@ -29,7 +29,11 @@
         <router-link router-link :to="{ name: 'Speakers' }">
           <div class="navbar-title">Speakers</div>
         </router-link>
-
+        
+        
+        <router-link router-link :to="{ name: 'newfeed' }">
+          <div class="navbar-title">Feed</div>
+        </router-link>
         <!--
         <router-link router-link :to="{ name: 'Schedule' }">
           <div class="navbar-title">Schedule</div>
@@ -49,7 +53,8 @@
              <!--<li v-on:click="redirect('Activities')">Activities</li>-->
               <li v-on:click="redirect('Partners')">Partners</li>
               <li v-on:click="redirect('Team')">Team</li>
-              
+              <li v-on:click="redirect('newfeed')">Feed</li>
+             
               <a href="https://jeec.jose-correia.com">
                 <div class="platform-button-menu">JEEC|Brain Login</div>
               </a>
