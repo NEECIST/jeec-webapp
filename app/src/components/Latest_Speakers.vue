@@ -1,5 +1,5 @@
 <template>
-  <div class="latest-speakers-comp">
+  <div v-show="speakers.length > 0" class="latest-speakers-comp">
     <component-title title="Latest Speakers" subtitle="Minds that push engineering forward"/>
 
     <div class="latest-speakers-flex">
@@ -51,7 +51,6 @@ export default {
   },
 
   mounted () {
-    var basicAuth = 'Basic ' + btoa(process.env.VUE_APP_JEEC_WEBSITE_USERNAME + ':' + process.env.VUE_APP_JEEC_WEBSITE_KEY);
 
     axios
       .get(process.env.VUE_APP_JEEC_WEBSITE_API_URL + '/speakers?spotlight=True', {

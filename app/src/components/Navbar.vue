@@ -1,9 +1,9 @@
 <template>
   <div class="navbar">
     <router-link router-link :to="{ name: 'Home' }">
-      <img class="navbar-left-logo" :src="navbar_logo_link" />
+      <img class="navbar-left-logo" :src="event ? jeec_brain_url + event.logo : ''" />
 
-      <img class="navbar-left-logo-mobile" :src="navbar_mobile_logo_link" />
+      <img class="navbar-left-logo-mobile" :src="event ? jeec_brain_url + event.mobile_logo : ''" />
     </router-link>
 
     <a href="https://jeec.jose-correia.com">
@@ -20,21 +20,17 @@
       <div class="navbar-title">Speakers</div>
     </router-link>
 
-    <router-link router-link :to="{ name: 'Partners' }">
-      <div class="navbar-title">Partners</div>
-    </router-link>
-
-    <!-- <router-link router-link :to="{ name: 'newfeed' }">
-      <div class="navbar-title">Feed</div>
-    </router-link> -->
-
-    <router-link router-link :to="{ name: 'Activities' }">
+    <router-link v-if="event ? event.show_registrations : false" router-link :to="{ name: 'Activities' }">
       <div class="navbar-title">Registrations</div>
     </router-link>
 
-    <router-link router-link :to="{ name: 'Schedule' }">
+    <router-link v-if="event ? event.show_schedule : false" router-link :to="{ name: 'Schedule' }">
       <div class="navbar-title">Schedule</div>
     </router-link>
+
+    <!-- <router-link router-link :to="{ name: 'Newsfeed' }">
+      <div class="navbar-title">News</div>
+    </router-link> -->
 
     <div id="menuToggle">
       <input type="checkbox" :checked="show_menu" v-on:click="show_menu = !show_menu" />
@@ -44,8 +40,10 @@
       <span></span>
 
       <ul id="menu">
-        <li v-on:click="redirect('Schedule')">Schedule</li>
-        <li v-on:click="redirect('Activities')">Registrations</li>
+        <!-- <li v-on:click="redirect('Newsfeed')">Newsfeed</li> -->
+        <li v-if="event ? event.show_schedule : false" v-on:click="redirect('Schedule')">Schedule</li>
+        <li v-if="event ? event.show_registrations : false" v-on:click="redirect('Activities')">Registrations</li>
+        <li v-on:click="redirect('Speakers')">Speakers</li>
         <li v-on:click="redirect('Partners')">Partners</li>
         <li v-on:click="redirect('Speakers')">Speakers</li>
         <li v-on:click="redirect('Team')">Team</li>
@@ -60,13 +58,18 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "navbar",
   data() {
     return {
       show_menu: false,
       navbar_logo_link: "../../static/jeec_logo_small.svg",
-      navbar_mobile_logo_link: "../../static/jeec_logo_mobile.svg"
+      navbar_mobile_logo_link: "../../static/jeec_logo_mobile.svg",
+      jeec_api_url: process.env.VUE_APP_JEEC_WEBSITE_API_URL,
+      jeec_brain_url: process.env.VUE_APP_JEEC_BRAIN_URL,
+      event: null,
     };
   },
 
@@ -75,7 +78,18 @@ export default {
       this.show_menu = false;
       this.$router.push({ name: page });
     }
-  }
+  },
+
+  mounted() {
+    axios
+      .get(this.jeec_api_url + "/event", {
+        auth: {
+          username: process.env.VUE_APP_JEEC_WEBSITE_USERNAME,
+          password: process.env.VUE_APP_JEEC_WEBSITE_KEY,
+        },
+      })
+      .then((response) => (this.event = response.data["data"]));
+  },
 };
 </script>
 

@@ -28,7 +28,8 @@ import Posts from './components/Posts'
 
 import Image_Center_Text from './components/Image_Center_Text'
 
-import Schedule_Company from './components/Schedule_Company'
+import Schedule_Module from './components/Schedule_Module'
+
 
 Vue.config.productionTip = false
 
@@ -57,7 +58,8 @@ Vue.component('techtalks', TechTalks)
 
 Vue.component('image-center-text', Image_Center_Text)
 
-Vue.component('schedule-company', Schedule_Company)
+Vue.component('schedule-company', Schedule_Module)
+
 
 /* eslint-disable no-new */
 new Vue({
